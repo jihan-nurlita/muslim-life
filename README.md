@@ -1,20 +1,25 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://ai.google.dev/static/site-assets/images/share-ais-513315318.png" />
-</div>
+# MuslimLife
 
-# Run and deploy your AI Studio app
+**Islamic Lifestyle Mobile Application**
 
-This contains everything you need to run your app locally.
+MuslimLife is an Islamic lifestyle application designed to support daily worship, encourage positive habits, and help users maintain consistency in their spiritual journey through a simple and user-friendly experience.
 
-View your app in AI Studio: https://ai.studio/apps/f7815828-8709-447a-9b85-428625c68857
+## Features
 
-## Run Locally
+- **Prayer Times** – Daily prayer schedules.
+- **Al-Qur'an** – Read and explore the Holy Qur'an.
+- **Prayer Guide** – Guidance for daily prayers.
+- **Dhikr & Tasbih** – Digital dhikr counter.
+- **Daily Duas** – Collection of daily supplications.
+- **Worship Habits** – Track and manage daily worship goals.
+- **Islamic Calendar** – Important Islamic dates and events.
+- **History & Statistics** – Track worship activities and progress.
 
-**Prerequisites:**  Node.js
+## Built With
 
+- Flutter
+- Dart
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+---
+
+*MuslimLife – Your Companion in Daily Worship.*

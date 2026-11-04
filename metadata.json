@@ -1,0 +1,7 @@
+{
+  "name": "MuslimLife",
+  "description": "Aplikasi Islamic Habit modern dengan jadwal sholat akurat, Al-Quran 30 juz, dzikir & tasbih digital, Asmaul Husna, pelacak kebiasaan ibadah dengan status halangan, kalender Hijriyah, riwayat statistik, dan catatan terpusat.",
+  "requestFramePermissions": ["geolocation"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+

@@ -188,14 +188,14 @@ export const Topbar: React.FC = () => {
                   </span>
                 </div>
 
-                <div className="hidden sm:flex items-center gap-1 shrink-0">
+                {/* <div className="hidden sm:flex items-center gap-1 shrink-0">
                   <kbd className="px-2 py-0.5 rounded-lg bg-white border border-slate-200/90 text-[11px] font-mono font-semibold text-slate-500 shadow-2xs">
                     Ctrl K
                   </kbd>
                 </div>
               </button>
             </div>
-          </div>
+          </div> */}
 
           {/* Right: 2. Notifikasi & 3. Profil / Akun */}
           <div className="flex items-center gap-1.5 sm:gap-3 shrink-0">

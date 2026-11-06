@@ -247,12 +247,13 @@ export const GlobalSearchModal: React.FC<GlobalSearchModalProps> = ({
                 </button>
               )}
               <button
-                type="button"
-                onClick={onClose}
-                className="px-2 py-1 rounded-lg bg-slate-200/80 hover:bg-slate-300 text-slate-600 text-xs font-bold transition-colors shrink-0"
-              >
-                ESC
-              </button>
+  type="button"
+  onClick={onClose}
+  className="p-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-slate-700 transition-colors shrink-0"
+  aria-label="Tutup pencarian"
+>
+  <X className="w-4 h-4" />
+</button>
             </div>
 
             {/* Category Filter Pills */}
@@ -553,9 +554,7 @@ export const GlobalSearchModal: React.FC<GlobalSearchModalProps> = ({
                 </button>
               </div>
 
-              <span className="text-[11px] text-slate-400 hidden sm:inline">
-                Gunakan <kbd className="px-1.5 py-0.5 bg-white border border-slate-300 rounded-md font-mono text-[10px]">Ctrl+K</kbd> untuk buka cepat
-              </span>
+              
             </div>
           </div>
         )}

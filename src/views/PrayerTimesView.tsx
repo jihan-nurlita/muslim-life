@@ -388,7 +388,7 @@ export const PrayerTimesView: React.FC = () => {
               >
                 {/* Main Row Content */}
               <div className="p-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
-                {/* Left Column: Icon, Name & Description (Kita beri flex-1 agar mengambil ruang proporsional) */}
+                {/* 1. Left Column: Icon, Name & Description */}
                 <div className="flex items-center gap-3.5 flex-1 min-w-0">
                   <div
                     className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 transition-colors ${
@@ -423,32 +423,32 @@ export const PrayerTimesView: React.FC = () => {
                   </div>
                 </div>
 
-                {/* Middle Column: Exact Time & Status Badge (Diberikan w-44 / ukuran tetap agar posisinya sejajar vertikal lurus) */}
-                <div className="flex items-center justify-between md:justify-end gap-4 shrink-0 md:w-48">
-                  <div className="text-left md:text-right w-full">
+                {/* 2. Middle Column: Exact Time & Status Badge (Diberikan min-w agar angka jam sejajar lurus vertikal) */}
+                <div className="flex items-center justify-between md:justify-end gap-4 shrink-0">
+                  <div className="text-left md:text-right min-w-[90px] sm:min-w-[100px]">
                     <span className="text-xl sm:text-2xl font-extrabold font-mono text-slate-800 block">
                       {timeStr}
                     </span>
                     <div className="mt-0.5">
                       {isCompleted ? (
-                        <span className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-700 bg-emerald-100/70 px-2 py-0.5 rounded-md">
+                        <span className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-700 bg-emerald-100/70 px-2 py-0.5 rounded-md whitespace-nowrap">
                           <CheckCircle2 className="w-3 h-3" />
                           {record.isJamaah ? 'Selesai Berjamaah' : 'Selesai Munfarid'}
                         </span>
                       ) : isHalangan ? (
-                        <span className="inline-flex items-center gap-1 text-[11px] font-bold text-rose-700 bg-rose-100/70 px-2 py-0.5 rounded-md">
+                        <span className="inline-flex items-center gap-1 text-[11px] font-bold text-rose-700 bg-rose-100/70 px-2 py-0.5 rounded-md whitespace-nowrap">
                           <ShieldAlert className="w-3 h-3" />
                           {record.halanganReason ? `Ada Udzur: ${record.halanganReason}` : 'Ada Halangan'}
                         </span>
                       ) : (
-                        <span className="text-[11px] font-semibold text-slate-400">Belum Ditandai</span>
+                        <span className="text-[11px] font-semibold text-slate-400 whitespace-nowrap">Belum Ditandai</span>
                       )}
                     </div>
                   </div>
                 </div>
 
-                {/* Right Column: Interactive Action Buttons */}
-                <div className="flex items-center gap-2 pt-2 md:pt-0 border-t md:border-0 border-slate-100 shrink-0">
+                {/* 3. Right Column: Interactive Action Buttons (Merapat natural ke kanan) */}
+                <div className="flex items-center gap-2 pt-2 md:pt-0 border-t md:border-0 border-slate-100 shrink-0 flex-wrap">
                   {(item.isFardhu || item.name === 'Dhuha') && (
                     <>
                       {/* 1. Mark Completed (Munfarid / Selesai) */}

@@ -16,9 +16,9 @@ export const SplashScreen: React.FC<SplashScreenProps> = () => {
       className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-white select-none px-4"
     >
       <motion.div
-        initial={{ opacity: 0, y: 15 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.4, ease: 'easeOut' }}
         className="flex flex-col items-center justify-center text-center"
       >
         {/* Logo Aplikasi Al-Qur'an */}

@@ -199,11 +199,11 @@ export const PrayerTimesView: React.FC = () => {
   };
 
   return (
-    <div className="space-y-6 pb-12 select-none" id="prayer-times-view">
+    <div className="space-y-6 pb-12 select-none min-w-0" id="prayer-times-view">
       {/* 1. Header & Location Controls Bar */}
-      <div className="p-5 sm:p-6 bg-white rounded-3xl border border-slate-200/80 shadow-xs space-y-4">
+      <div className="p-5 sm:p-6 bg-white rounded-3xl border border-slate-200/80 shadow-xs space-y-4 min-w-0 overflow-hidden">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-          <div>
+          <div className="min-w-0">
             <h2 className="text-xl sm:text-2xl font-extrabold text-slate-800 tracking-tight">
               Jadwal Waktu Sholat
             </h2>
@@ -213,16 +213,16 @@ export const PrayerTimesView: React.FC = () => {
           </div>
 
           {/* Location Action */}
-          <div className="flex items-center gap-2 shrink-0">
+          <div className="flex items-center gap-2 shrink-0 max-w-full">
             <button
               type="button"
               onClick={() => setIsLocationModalOpen(true)}
               id="manual-location-btn"
-              className="flex items-center gap-2 px-3.5 py-2 rounded-2xl bg-white hover:bg-slate-50 text-slate-700 text-xs font-semibold border border-slate-200/90 transition-all shadow-xs active:scale-95 cursor-pointer"
+              className="flex items-center gap-2 px-3.5 py-2 rounded-2xl bg-white hover:bg-slate-50 text-slate-700 text-xs font-semibold border border-slate-200/90 transition-all shadow-xs active:scale-95 cursor-pointer max-w-full"
             >
-              <MapPin className="w-4 h-4 text-emerald-600" />
+              <MapPin className="w-4 h-4 text-emerald-600 shrink-0" />
               <span className="truncate max-w-[140px]">{settings.city}</span>
-              <span className="text-[10px] text-emerald-700 font-bold bg-emerald-50 px-2 py-0.5 rounded-md">
+              <span className="text-[10px] text-emerald-700 font-bold bg-emerald-50 px-2 py-0.5 rounded-md shrink-0">
                 Ubah Wilayah
               </span>
             </button>
@@ -231,12 +231,12 @@ export const PrayerTimesView: React.FC = () => {
 
         {/* GPS Error Notification if any */}
         {gpsError && (
-          <div className="p-3 rounded-2xl bg-rose-50 border border-rose-200/80 text-rose-700 text-xs flex items-center justify-between">
+          <div className="p-3 rounded-2xl bg-rose-50 border border-rose-200/80 text-rose-700 text-xs flex items-center justify-between gap-2">
             <span>{gpsError}</span>
             <button
               type="button"
               onClick={() => setGpsError(null)}
-              className="font-bold underline text-rose-800 ml-2"
+              className="font-bold underline text-rose-800 ml-2 shrink-0"
             >
               Tutup
             </button>
@@ -245,8 +245,8 @@ export const PrayerTimesView: React.FC = () => {
 
         {/* Date Specs */}
         <div className="pt-3 border-t border-slate-100 flex items-center justify-between gap-3 text-xs">
-          <div className="flex items-center gap-2 text-slate-600">
-            <CalendarIcon className="w-4 h-4 text-emerald-600" />
+          <div className="flex items-center gap-2 flex-wrap text-slate-600 min-w-0">
+            <CalendarIcon className="w-4 h-4 text-emerald-600 shrink-0" />
             <span className="font-bold text-slate-800">{hijriInfo.formatted}</span>
             <span className="text-slate-400">•</span>
             <span>{dateObj.toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })}</span>
@@ -255,7 +255,7 @@ export const PrayerTimesView: React.FC = () => {
       </div>
 
       {/* 2. Hero Next Prayer & Live Countdown Banner */}
-      <div className="p-6 sm:p-7 rounded-3xl bg-gradient-to-br from-emerald-800 via-emerald-700 to-teal-800 text-white shadow-lg shadow-emerald-900/10 relative overflow-hidden">
+      <div className="p-6 sm:p-7 rounded-3xl bg-gradient-to-br from-emerald-800 via-emerald-700 to-teal-800 text-white shadow-lg shadow-emerald-900/10 relative overflow-hidden min-w-0">
         <div className="absolute right-0 top-0 bottom-0 w-1/3 opacity-10 pointer-events-none flex items-center justify-end pr-4">
           <Moon className="w-64 h-64 text-white" />
         </div>
@@ -266,7 +266,7 @@ export const PrayerTimesView: React.FC = () => {
             <span>Waktu Sholat Selanjutnya</span>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 flex-wrap">
             <button
               type="button"
               onClick={() => setIsQiblaModalOpen(true)}
@@ -289,8 +289,8 @@ export const PrayerTimesView: React.FC = () => {
         </div>
 
         <div className="relative z-10 my-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-          <div>
-            <div className="flex items-baseline gap-3">
+          <div className="min-w-0">
+            <div className="flex items-baseline gap-3 flex-wrap">
               <h3 className="text-3xl sm:text-4xl font-extrabold tracking-tight">
                 {nextPrayer.name}
               </h3>
@@ -303,7 +303,7 @@ export const PrayerTimesView: React.FC = () => {
             </p>
           </div>
 
-          <div className="bg-white/10 backdrop-blur-xs px-4 py-3 rounded-2xl border border-white/15 text-right sm:text-right shrink-0">
+          <div className="bg-white/10 backdrop-blur-xs px-4 py-3 rounded-2xl border border-white/15 text-left sm:text-right shrink-0">
             <span className="text-xs text-emerald-200 block">Sisa Waktu Menuju Adzan</span>
             <span className="font-mono text-white text-2xl font-black tracking-tight block">
               {nextPrayer.remainingFormatted}
@@ -330,21 +330,21 @@ export const PrayerTimesView: React.FC = () => {
       </div>
 
       {/* 3. Main Prayer Schedule & Per-Prayer Control Cards */}
-      <div className="p-6 rounded-3xl bg-white border border-slate-200/80 shadow-xs space-y-4">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 pb-3 border-b border-slate-100">
-          <div>
+      <div className="p-4 sm:p-6 rounded-3xl bg-white border border-slate-200/80 shadow-xs space-y-4 min-w-0 overflow-hidden">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 pb-3 border-b border-slate-100 min-w-0">
+          <div className="min-w-0">
             <h3 className="font-bold text-slate-800 text-base">Jadwal Sholat Lengkap & Pencatatan</h3>
             <p className="text-xs text-slate-500">
               Tandai ibadah sholat, catat udzur syar'i, dan atur reminder khusus setiap waktu sholat
             </p>
           </div>
 
-          <div className="flex items-center gap-2">
-            <span className="text-xs font-medium text-slate-500">Global Suara:</span>
+          <div className="flex flex-col sm:flex-row sm:items-center gap-1.5 sm:gap-2 w-full sm:w-auto min-w-0 shrink-0">
+            <span className="text-xs font-medium text-slate-500 shrink-0">Global Suara:</span>
             <select
               value={settings.adzanSound || 'adzan-makkah'}
               onChange={(e) => updateSettings({ adzanSound: e.target.value as any })}
-              className="text-xs font-semibold text-emerald-800 bg-emerald-50 border border-emerald-200 rounded-xl px-2.5 py-1.5 focus:outline-none"
+              className="w-full sm:w-auto max-w-full min-w-0 truncate text-xs font-semibold text-emerald-800 bg-emerald-50 border border-emerald-200 rounded-xl px-2.5 py-1.5 focus:outline-none"
             >
               {SOUND_OPTIONS.map((s) => (
                 <option key={s.id} value={s.id}>
@@ -356,7 +356,7 @@ export const PrayerTimesView: React.FC = () => {
         </div>
 
         {/* Schedule List */}
-        <div className="space-y-3">
+        <div className="space-y-3 min-w-0">
           {ALL_PRAYERS.map((item) => {
             const Icon = item.icon;
             const timeStr = prayerTimes[item.name] || '--:--';
@@ -376,7 +376,7 @@ export const PrayerTimesView: React.FC = () => {
               <div
                 key={item.name}
                 id={`prayer-schedule-row-${item.name.toLowerCase()}`}
-                className={`rounded-2xl border transition-all overflow-hidden ${
+                className={`rounded-2xl border transition-all overflow-hidden min-w-0 ${
                   isNext
                     ? 'border-emerald-500 bg-emerald-50/40 ring-2 ring-emerald-500/20 shadow-xs'
                     : isCompleted
@@ -387,9 +387,9 @@ export const PrayerTimesView: React.FC = () => {
                 }`}
               >
                 {/* Main Row Content */}
-                <div className="p-4 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                <div className="p-4 flex flex-col md:flex-row md:items-center justify-between gap-4 min-w-0">
                   {/* Left Column: Icon & Name */}
-                  <div className="flex items-center gap-3.5">
+                  <div className="flex items-center gap-3.5 min-w-0">
                     <div
                       className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 transition-colors ${
                         isNext
@@ -404,16 +404,16 @@ export const PrayerTimesView: React.FC = () => {
                       <Icon className="w-5 h-5" />
                     </div>
 
-                    <div>
-                      <div className="flex items-center gap-2">
+                    <div className="min-w-0">
+                      <div className="flex items-center gap-2 flex-wrap">
                         <span className="font-extrabold text-slate-800 text-base">{item.label}</span>
                         {item.isFardhu && (
-                          <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800">
+                          <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 shrink-0">
                             {item.rakaat} Rakaat Fardhu
                           </span>
                         )}
                         {isNext && (
-                          <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-100 text-amber-900 animate-pulse">
+                          <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-100 text-amber-900 animate-pulse shrink-0">
                             Waktu Berikutnya
                           </span>
                         )}
@@ -424,20 +424,20 @@ export const PrayerTimesView: React.FC = () => {
                   </div>
 
                   {/* Middle Column: Exact Time & Status Badge */}
-                  <div className="flex items-center gap-4">
-                    <div className="text-left md:text-right">
+                  <div className="flex items-center gap-4 min-w-0">
+                    <div className="text-left md:text-right min-w-0">
                       <span className="text-xl sm:text-2xl font-extrabold font-mono text-slate-800 block">
                         {timeStr}
                       </span>
                       <div className="mt-0.5">
                         {isCompleted ? (
                           <span className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-700 bg-emerald-100/70 px-2 py-0.5 rounded-md">
-                            <CheckCircle2 className="w-3 h-3" />
+                            <CheckCircle2 className="w-3 h-3 shrink-0" />
                             {record.isJamaah ? 'Selesai Berjamaah' : 'Selesai Munfarid'}
                           </span>
                         ) : isHalangan ? (
                           <span className="inline-flex items-center gap-1 text-[11px] font-bold text-rose-700 bg-rose-100/70 px-2 py-0.5 rounded-md">
-                            <ShieldAlert className="w-3 h-3" />
+                            <ShieldAlert className="w-3 h-3 shrink-0" />
                             {record.halanganReason ? `Ada Udzur: ${record.halanganReason}` : 'Ada Halangan'}
                           </span>
                         ) : (
@@ -448,7 +448,7 @@ export const PrayerTimesView: React.FC = () => {
                   </div>
 
                   {/* Right Column: Interactive Action Buttons */}
-                  <div className="flex items-center gap-2 pt-2 md:pt-0 border-t md:border-0 border-slate-100">
+                  <div className="flex items-center flex-wrap gap-2 pt-2 md:pt-0 border-t md:border-0 border-slate-100 shrink-0">
                     {(item.isFardhu || item.name === 'Dhuha') && (
                       <>
                         {/* 1. Mark Completed (Munfarid / Selesai) */}
@@ -462,13 +462,13 @@ export const PrayerTimesView: React.FC = () => {
                           }
                           id={`prayer-btn-munfarid-${item.name.toLowerCase()}`}
                           title="Tandai Selesai"
-                          className={`px-3 py-2 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-all ${
+                          className={`px-3 py-2 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-all shrink-0 ${
                             isCompleted && !record.isJamaah
                               ? 'bg-emerald-600 text-white shadow-xs'
                               : 'bg-slate-100 hover:bg-emerald-50 text-slate-700 hover:text-emerald-700'
                           }`}
                         >
-                          <User className="w-3.5 h-3.5" />
+                          <User className="w-3.5 h-3.5 shrink-0" />
                           <span>{item.isFardhu ? 'Munfarid' : 'Selesai'}</span>
                         </button>
 
@@ -484,13 +484,13 @@ export const PrayerTimesView: React.FC = () => {
                             }
                             id={`prayer-btn-jamaah-${item.name.toLowerCase()}`}
                             title="Tandai Selesai Berjamaah"
-                            className={`px-3 py-2 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-all ${
+                            className={`px-3 py-2 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-all shrink-0 ${
                               isCompleted && record.isJamaah
                                 ? 'bg-teal-700 text-white shadow-xs'
                                 : 'bg-slate-100 hover:bg-teal-50 text-slate-700 hover:text-teal-700'
                             }`}
                           >
-                            <Users className="w-3.5 h-3.5" />
+                            <Users className="w-3.5 h-3.5 shrink-0" />
                             <span>Berjamaah</span>
                           </button>
                         )}
@@ -501,7 +501,7 @@ export const PrayerTimesView: React.FC = () => {
                           onClick={() => handleOpenHalangan(item.name)}
                           id={`prayer-btn-halangan-${item.name.toLowerCase()}`}
                           title="Catat Alasan Halangan / Udzur"
-                          className={`p-2 rounded-xl text-xs transition-all cursor-pointer ${
+                          className={`p-2 rounded-xl text-xs transition-all cursor-pointer shrink-0 ${
                             isHalangan
                               ? 'bg-rose-600 text-white shadow-xs'
                               : 'bg-slate-100 hover:bg-rose-100 text-slate-500 hover:text-rose-700'
@@ -518,7 +518,7 @@ export const PrayerTimesView: React.FC = () => {
                       onClick={() => handleToggleReminder(item.name)}
                       id={`prayer-toggle-reminder-${item.name.toLowerCase()}`}
                       title={isReminderOn ? 'Reminder Adzan Aktif' : 'Reminder Adzan Nonaktif'}
-                      className={`p-2 rounded-xl text-xs transition-all ${
+                      className={`p-2 rounded-xl text-xs transition-all shrink-0 ${
                         isReminderOn
                           ? 'bg-emerald-100 text-emerald-800 border border-emerald-300'
                           : 'bg-slate-100 text-slate-400 hover:text-slate-600'
@@ -533,7 +533,7 @@ export const PrayerTimesView: React.FC = () => {
                       onClick={() => setActiveSettingsPrayer(isSettingsOpen ? null : item.name)}
                       id={`prayer-settings-toggle-${item.name.toLowerCase()}`}
                       title="Atur Menit Pengingat & Suara Adzan"
-                      className={`p-2 rounded-xl text-xs transition-all ${
+                      className={`p-2 rounded-xl text-xs transition-all shrink-0 ${
                         isSettingsOpen
                           ? 'bg-slate-800 text-white'
                           : 'bg-slate-100 text-slate-500 hover:bg-slate-200'
@@ -546,17 +546,17 @@ export const PrayerTimesView: React.FC = () => {
 
                 {/* Collapsible Per-Prayer Reminder Configuration */}
                 {isSettingsOpen && (
-                  <div className="px-5 py-4 bg-slate-50 border-t border-slate-200/80 space-y-3">
-                    <div className="flex items-center justify-between">
+                  <div className="px-5 py-4 bg-slate-50 border-t border-slate-200/80 space-y-3 min-w-0">
+                    <div className="flex items-center justify-between gap-2 flex-wrap">
                       <span className="text-xs font-bold text-slate-800">
                         Pengaturan Pengingat & Suara untuk {item.label}
                       </span>
                       <span className="text-[11px] text-slate-500">Konfigurasi Mandiri</span>
                     </div>
 
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 min-w-0">
                       {/* Reminder Before Minutes */}
-                      <div>
+                      <div className="min-w-0">
                         <label className="text-[11px] font-semibold text-slate-600 block mb-1">
                           Waktu Pengingat Sebelum Adzan:
                         </label>
@@ -579,7 +579,7 @@ export const PrayerTimesView: React.FC = () => {
                       </div>
 
                       {/* Sound Type Selection */}
-                      <div>
+                      <div className="min-w-0">
                         <label className="text-[11px] font-semibold text-slate-600 block mb-1">
                           Pilihan Suara Notifikasi:
                         </label>
@@ -588,7 +588,7 @@ export const PrayerTimesView: React.FC = () => {
                           onChange={(e) =>
                             handleUpdateReminderConfig(item.name, { sound: e.target.value as any })
                           }
-                          className="w-full text-xs font-medium text-slate-800 bg-white border border-slate-200 rounded-xl px-2.5 py-1.5 focus:outline-none focus:ring-1 focus:ring-emerald-500"
+                          className="w-full max-w-full truncate text-xs font-medium text-slate-800 bg-white border border-slate-200 rounded-xl px-2.5 py-1.5 focus:outline-none focus:ring-1 focus:ring-emerald-500"
                         >
                           {SOUND_OPTIONS.map((s) => (
                             <option key={s.id} value={s.id}>
@@ -599,13 +599,13 @@ export const PrayerTimesView: React.FC = () => {
                       </div>
 
                       {/* Test Sound Button */}
-                      <div className="flex items-end">
+                      <div className="flex items-end min-w-0">
                         <button
                           type="button"
                           onClick={() => handleTestSound(reminderConfig.sound || 'adzan-makkah')}
                           className="w-full py-1.5 px-3 rounded-xl bg-white border border-slate-200 hover:bg-emerald-50 hover:border-emerald-300 text-slate-700 hover:text-emerald-800 text-xs font-semibold flex items-center justify-center gap-1.5 transition-all shadow-xs"
                         >
-                          <Play className="w-3.5 h-3.5 fill-current" />
+                          <Play className="w-3.5 h-3.5 fill-current shrink-0" />
                           <span>Uji Nada Suara</span>
                         </button>
                       </div>

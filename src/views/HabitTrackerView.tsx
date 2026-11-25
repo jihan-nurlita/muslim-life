@@ -181,10 +181,10 @@ export const HabitTrackerView: React.FC = () => {
   };
 
   return (
-    <div className="space-y-6 max-w-5xl mx-auto pb-12" id="habit-tracker-view">
+    <div className="space-y-6 max-w-5xl mx-auto pb-12 min-w-0" id="habit-tracker-view">
       {/* Top Header & Action */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div>
+        <div className="min-w-0">
           <h2 className="text-xl sm:text-2xl font-bold text-slate-800 tracking-tight">
             Habit & Mutaba'ah Ibadah
           </h2>
@@ -193,7 +193,7 @@ export const HabitTrackerView: React.FC = () => {
           </p>
         </div>
 
-        <div className="flex items-center gap-2.5">
+        <div className="flex items-center gap-2.5 shrink-0">
           <button
             type="button"
             onClick={() => {
@@ -203,25 +203,25 @@ export const HabitTrackerView: React.FC = () => {
             id="add-habit-btn"
             className="flex items-center gap-2 px-4 py-2.5 rounded-2xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs sm:text-sm shadow-md shadow-emerald-600/20 transition-all hover:scale-[1.02] active:scale-[0.98]"
           >
-            <Plus className="w-4 h-4" />
-            Tambah Habit
+            <Plus className="w-4 h-4 shrink-0" />
+            <span>Tambah Habit</span>
           </button>
         </div>
       </div>
 
       {/* Date Navigator Bar */}
-      <div className="flex items-center justify-between p-3.5 sm:p-4 rounded-3xl bg-white border border-slate-200/80 shadow-xs">
+      <div className="flex items-center justify-between gap-2 p-3.5 sm:p-4 rounded-3xl bg-white border border-slate-200/80 shadow-xs min-w-0">
         <button
           type="button"
           onClick={handlePreviousDay}
           id="habit-prev-day-btn"
-          className="p-2 rounded-2xl bg-slate-50 hover:bg-slate-100 text-slate-600 transition-colors border border-slate-200/60"
+          className="p-2 rounded-2xl bg-slate-50 hover:bg-slate-100 text-slate-600 transition-colors border border-slate-200/60 shrink-0"
           title="Hari Sebelumnya"
         >
           <ChevronLeft className="w-4 h-4" />
         </button>
 
-        <div className="flex items-center justify-center flex-wrap gap-2 text-center">
+        <div className="flex items-center justify-center flex-wrap gap-1.5 sm:gap-2 text-center min-w-0">
           <Calendar className="w-4 h-4 text-emerald-600 shrink-0" />
           <span className="text-xs sm:text-sm font-bold text-slate-800">
             {getFormattedDate(selectedDate)}
@@ -231,7 +231,7 @@ export const HabitTrackerView: React.FC = () => {
               type="button"
               onClick={handleToday}
               id="habit-today-btn"
-              className="text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200 hover:bg-emerald-100 transition-colors ml-1"
+              className="text-[11px] font-bold text-emerald-700 bg-emerald-50 px-2.5 py-0.5 rounded-full border border-emerald-200 hover:bg-emerald-100 transition-colors"
             >
               Kembali ke Hari Ini
             </button>
@@ -242,7 +242,7 @@ export const HabitTrackerView: React.FC = () => {
           type="button"
           onClick={handleNextDay}
           id="habit-next-day-btn"
-          className="p-2 rounded-2xl bg-slate-50 hover:bg-slate-100 text-slate-600 transition-colors border border-slate-200/60"
+          className="p-2 rounded-2xl bg-slate-50 hover:bg-slate-100 text-slate-600 transition-colors border border-slate-200/60 shrink-0"
           title="Hari Berikutnya"
         >
           <ChevronRight className="w-4 h-4" />
@@ -250,13 +250,13 @@ export const HabitTrackerView: React.FC = () => {
       </div>
 
       {/* Overview Cards (Daily Progress & Streak) */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 min-w-0">
         {/* Progress Card */}
-        <div className="md:col-span-2 p-6 rounded-3xl bg-gradient-to-br from-emerald-600 via-emerald-700 to-teal-800 text-white shadow-md shadow-emerald-700/20 relative overflow-hidden flex flex-col justify-between">
+        <div className="md:col-span-2 p-6 rounded-3xl bg-gradient-to-br from-emerald-600 via-emerald-700 to-teal-800 text-white shadow-md shadow-emerald-700/20 relative overflow-hidden flex flex-col justify-between min-w-0">
           <div className="absolute -right-8 -top-8 w-40 h-40 bg-white/10 rounded-full blur-2xl pointer-events-none" />
 
-          <div className="flex items-center justify-between mb-4">
-            <div className="flex items-center gap-2">
+          <div className="flex items-center justify-between gap-2 mb-4">
+            <div className="flex items-center gap-2 flex-wrap">
               <span className="px-3 py-1 rounded-full bg-white/15 backdrop-blur-xs text-xs font-semibold">
                 Mutaba'ah Harian
               </span>
@@ -264,7 +264,7 @@ export const HabitTrackerView: React.FC = () => {
                 {totalHabits} Habit Aktif
               </span>
             </div>
-            <div className="text-right">
+            <div className="text-right shrink-0">
               <span className="text-2xl sm:text-3xl font-black font-mono">{progressPercent}%</span>
             </div>
           </div>
@@ -277,7 +277,7 @@ export const HabitTrackerView: React.FC = () => {
                 animate={{ width: `${progressPercent}%` }}
               />
             </div>
-            <div className="flex justify-between text-xs text-emerald-100">
+            <div className="flex justify-between gap-2 text-xs text-emerald-100">
               <span>{completedCount} Selesai Dikerjakan</span>
               {halanganCount > 0 && <span>{halanganCount} Udzur Syar'i</span>}
             </div>
@@ -285,14 +285,14 @@ export const HabitTrackerView: React.FC = () => {
         </div>
 
         {/* Streak & Consistency Card */}
-        <div className="p-6 rounded-3xl bg-white border border-slate-200/80 shadow-xs flex flex-col justify-between">
+        <div className="p-6 rounded-3xl bg-white border border-slate-200/80 shadow-xs flex flex-col justify-between min-w-0">
           <div className="flex items-center justify-between">
             <span className="text-xs font-bold uppercase tracking-wider text-slate-400">Streak Ibadah</span>
-            <Flame className="w-5 h-5 text-amber-500 fill-amber-500 animate-pulse" />
+            <Flame className="w-5 h-5 text-amber-500 fill-amber-500 animate-pulse shrink-0" />
           </div>
 
           <div className="my-2">
-            <div className="flex items-baseline gap-2">
+            <div className="flex items-baseline gap-2 flex-wrap">
               <span className="text-3xl font-extrabold text-slate-800 font-mono">{currentStreak}</span>
               <span className="text-sm font-bold text-amber-700">Hari Berturut-turut</span>
             </div>
@@ -308,15 +308,15 @@ export const HabitTrackerView: React.FC = () => {
       </div>
 
       {/* Filter Tabs & Status Bar */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 min-w-0">
         {/* Category Tabs Filter */}
-        <div className="flex items-center gap-1.5 overflow-x-auto pb-2 scrollbar-thin flex-1">
+        <div className="flex items-center gap-1.5 overflow-x-auto pb-2 scrollbar-thin flex-1 min-w-0">
           {CATEGORY_TABS.map((cat) => (
             <button
               key={cat.id}
               type="button"
               onClick={() => setActiveCategory(cat.id)}
-              className={`px-3.5 py-2 rounded-2xl text-xs font-semibold whitespace-nowrap transition-all ${
+              className={`px-3.5 py-2 rounded-2xl text-xs font-semibold whitespace-nowrap transition-all shrink-0 ${
                 activeCategory === cat.id
                   ? 'bg-emerald-600 text-white shadow-xs'
                   : 'bg-white border border-slate-200/80 text-slate-600 hover:bg-slate-50'
@@ -328,11 +328,11 @@ export const HabitTrackerView: React.FC = () => {
         </div>
 
         {/* Active / Inactive Filter toggle */}
-        <div className="flex items-center gap-1 bg-white p-1 rounded-2xl border border-slate-200 shrink-0 self-start sm:self-auto shadow-2xs">
+        <div className="flex items-center gap-1 bg-white p-1 rounded-2xl border border-slate-200 shrink-0 self-start sm:self-auto shadow-2xs max-w-full overflow-x-auto">
           <button
             type="button"
             onClick={() => setFilterActiveStatus('all')}
-            className={`px-2.5 py-1 rounded-xl text-[11px] font-semibold transition-colors ${
+            className={`px-2.5 py-1 rounded-xl text-[11px] font-semibold transition-colors whitespace-nowrap shrink-0 ${
               filterActiveStatus === 'all'
                 ? 'bg-emerald-100 text-emerald-800'
                 : 'text-slate-500 hover:text-slate-700'
@@ -343,7 +343,7 @@ export const HabitTrackerView: React.FC = () => {
           <button
             type="button"
             onClick={() => setFilterActiveStatus('active_only')}
-            className={`px-2.5 py-1 rounded-xl text-[11px] font-semibold transition-colors ${
+            className={`px-2.5 py-1 rounded-xl text-[11px] font-semibold transition-colors whitespace-nowrap shrink-0 ${
               filterActiveStatus === 'active_only'
                 ? 'bg-emerald-100 text-emerald-800'
                 : 'text-slate-500 hover:text-slate-700'
@@ -354,7 +354,7 @@ export const HabitTrackerView: React.FC = () => {
           <button
             type="button"
             onClick={() => setFilterActiveStatus('inactive_only')}
-            className={`px-2.5 py-1 rounded-xl text-[11px] font-semibold transition-colors ${
+            className={`px-2.5 py-1 rounded-xl text-[11px] font-semibold transition-colors whitespace-nowrap shrink-0 ${
               filterActiveStatus === 'inactive_only'
                 ? 'bg-slate-200 text-slate-800'
                 : 'text-slate-500 hover:text-slate-700'
@@ -366,7 +366,7 @@ export const HabitTrackerView: React.FC = () => {
       </div>
 
       {/* Habits List Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5 min-w-0">
         {filteredHabits.map((h) => {
           const {
             isCompleted,
@@ -387,7 +387,7 @@ export const HabitTrackerView: React.FC = () => {
             <div
               key={h.id}
               id={`habit-card-${h.id}`}
-              className={`p-4 sm:p-5 rounded-3xl border transition-all flex flex-col justify-between gap-3 ${
+              className={`min-w-0 overflow-hidden p-4 sm:p-5 rounded-3xl border transition-all flex flex-col justify-between gap-3 ${
                 isInactive
                   ? 'border-slate-200 bg-slate-50/70 opacity-75'
                   : isCompleted
@@ -398,7 +398,7 @@ export const HabitTrackerView: React.FC = () => {
               }`}
             >
               {/* Top Row: Info & Meta */}
-              <div className="flex items-start justify-between gap-3">
+              <div className="flex items-start justify-between gap-3 min-w-0">
                 <div
                   className="flex items-start gap-3.5 min-w-0 flex-1 cursor-pointer group"
                   onClick={() => setSelectedDetailHabit(h)}
@@ -419,7 +419,7 @@ export const HabitTrackerView: React.FC = () => {
 
                   <div className="min-w-0 flex-1">
                     <div className="flex items-center gap-2 flex-wrap">
-                      <h4 className="text-xs sm:text-sm font-bold text-slate-800 truncate group-hover:text-emerald-700 transition-colors">
+                      <h4 className="text-xs sm:text-sm font-bold text-slate-800 break-words group-hover:text-emerald-700 transition-colors">
                         {h.title}
                       </h4>
                       {isCompleted && (
@@ -428,7 +428,7 @@ export const HabitTrackerView: React.FC = () => {
                         </span>
                       )}
                       {isHalangan && (
-                        <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-rose-100 text-rose-800 shrink-0">
+                        <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-rose-100 text-rose-800 shrink-0 max-w-full truncate">
                           Udzur ({halanganReasonText || record?.halanganReason || 'Halangan'})
                         </span>
                       )}
@@ -453,22 +453,22 @@ export const HabitTrackerView: React.FC = () => {
                     )}
 
                     {/* Metadata tags */}
-                    <div className="flex items-center gap-2 mt-1.5 flex-wrap">
+                    <div className="flex items-center gap-1.5 mt-1.5 flex-wrap">
                       {frequencyBadge && (
                         <span className="text-[10px] font-semibold px-2 py-0.5 rounded-lg bg-teal-50 text-teal-700 border border-teal-100 flex items-center gap-1">
-                          <Calendar className="w-2.5 h-2.5" />
+                          <Calendar className="w-2.5 h-2.5 shrink-0" />
                           {frequencyBadge}
                         </span>
                       )}
                       {h.reminderEnabled && h.reminderTime && (
                         <span className="text-[10px] font-semibold px-2 py-0.5 rounded-lg bg-amber-50 text-amber-700 border border-amber-100 flex items-center gap-1">
-                          <Clock className="w-2.5 h-2.5" />
+                          <Clock className="w-2.5 h-2.5 shrink-0" />
                           {h.reminderTime} WIB
                         </span>
                       )}
                       {h.syncSource && h.syncSource !== 'none' && (
                         <span className="text-[10px] font-semibold px-2 py-0.5 rounded-lg bg-emerald-50 text-emerald-700 border border-emerald-100 flex items-center gap-1">
-                          <RefreshCw className="w-2.5 h-2.5" />
+                          <RefreshCw className="w-2.5 h-2.5 shrink-0" />
                           Sinkron
                         </span>
                       )}
@@ -488,15 +488,15 @@ export const HabitTrackerView: React.FC = () => {
               </div>
 
               {/* Bottom Action Bar */}
-              <div className="flex items-center justify-between pt-2 border-t border-slate-100/80 gap-2">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between pt-2.5 border-t border-slate-100/80 gap-2 min-w-0">
                 {/* Management Action Icons (Detail, Edit, Nonaktif, Hapus) */}
-                <div className="flex items-center gap-1">
+                <div className="flex items-center gap-1 shrink-0">
                   {/* Detail */}
                   <button
                     type="button"
                     onClick={() => setSelectedDetailHabit(h)}
                     title="Lihat Detail & Riwayat"
-                    className="p-1.5 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-500 hover:text-slate-800 transition-colors border border-slate-200"
+                    className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-slate-50 hover:bg-slate-100 text-slate-500 hover:text-slate-800 transition-colors border border-slate-200 flex items-center justify-center shrink-0"
                   >
                     <Eye className="w-3.5 h-3.5" />
                   </button>
@@ -509,7 +509,7 @@ export const HabitTrackerView: React.FC = () => {
                       setIsAddModalOpen(true);
                     }}
                     title="Edit Habit"
-                    className="p-1.5 rounded-xl bg-slate-50 hover:bg-emerald-50 text-slate-500 hover:text-emerald-700 transition-colors border border-slate-200"
+                    className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-slate-50 hover:bg-emerald-50 text-slate-500 hover:text-emerald-700 transition-colors border border-slate-200 flex items-center justify-center shrink-0"
                   >
                     <Edit3 className="w-3.5 h-3.5" />
                   </button>
@@ -519,7 +519,7 @@ export const HabitTrackerView: React.FC = () => {
                     type="button"
                     onClick={() => toggleHabitActive(h.id)}
                     title={h.isActive !== false ? 'Nonaktifkan Habit' : 'Aktifkan Habit'}
-                    className={`p-1.5 rounded-xl transition-colors border ${
+                    className={`w-7 h-7 sm:w-8 sm:h-8 rounded-xl transition-colors border flex items-center justify-center shrink-0 ${
                       h.isActive !== false
                         ? 'bg-slate-50 text-slate-500 hover:bg-slate-100 hover:text-slate-700 border-slate-200'
                         : 'bg-emerald-50 text-emerald-700 border-emerald-200 hover:bg-emerald-100'
@@ -533,22 +533,22 @@ export const HabitTrackerView: React.FC = () => {
                     type="button"
                     onClick={() => setHabitToDelete(h)}
                     title="Hapus Habit"
-                    className="p-1.5 rounded-xl bg-slate-50 hover:bg-rose-50 text-slate-500 hover:text-rose-600 transition-colors border border-slate-200"
+                    className="w-7 h-7 sm:w-8 sm:h-8 rounded-xl bg-slate-50 hover:bg-rose-50 text-slate-500 hover:text-rose-600 transition-colors border border-slate-200 flex items-center justify-center shrink-0"
                   >
                     <Trash2 className="w-3.5 h-3.5" />
                   </button>
                 </div>
 
                 {/* Right Quick Status Controls */}
-                <div className="flex items-center gap-1.5">
+                <div className="flex items-center justify-between sm:justify-end gap-1.5 w-full sm:w-auto min-w-0">
                   {/* Catat / Tambah Nilai Button */}
                   <button
                     type="button"
                     onClick={() => setHabitToLog(h)}
                     title="Catat / Tambah Hasil Aktual"
-                    className="px-2.5 py-1.5 rounded-xl text-xs font-semibold bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200/80 flex items-center gap-1 transition-colors"
+                    className="h-8 px-2.5 rounded-xl text-[11px] sm:text-xs font-semibold bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200/80 flex items-center justify-center gap-1 transition-colors shrink-0"
                   >
-                    <TrendingUp className="w-3.5 h-3.5 text-emerald-600" />
+                    <TrendingUp className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
                     <span>Catat</span>
                   </button>
 
@@ -566,14 +566,14 @@ export const HabitTrackerView: React.FC = () => {
                       )
                     }
                     id={`habit-toggle-btn-${h.id}`}
-                    className={`px-3 py-1.5 rounded-xl text-xs font-semibold flex items-center gap-1.5 transition-all ${
+                    className={`h-8 px-2.5 sm:px-3 rounded-xl text-[11px] sm:text-xs font-semibold flex items-center justify-center gap-1 transition-all shrink-0 ${
                       isCompleted
                         ? 'bg-emerald-600 text-white shadow-xs hover:bg-emerald-700'
                         : 'bg-slate-100 hover:bg-emerald-50 hover:text-emerald-700 text-slate-700 border border-slate-200'
                     }`}
                   >
-                    <CheckCircle2 className="w-3.5 h-3.5" />
-                    {isCompleted ? 'Tuntas' : 'Centang'}
+                    <CheckCircle2 className="w-3.5 h-3.5 shrink-0" />
+                    <span>{isCompleted ? 'Tuntas' : 'Centang'}</span>
                   </button>
 
                   {/* Halangan Button */}
@@ -582,7 +582,7 @@ export const HabitTrackerView: React.FC = () => {
                     onClick={() => setHabitForHalangan(h.id)}
                     title="Catat Ada Halangan / Udzur Syar'i"
                     id={`habit-halangan-btn-${h.id}`}
-                    className={`p-1.5 rounded-xl text-xs border transition-all ${
+                    className={`w-8 h-8 rounded-xl text-xs border transition-all flex items-center justify-center shrink-0 ${
                       isHalangan
                         ? 'bg-rose-600 text-white border-rose-600'
                         : 'bg-slate-50 border-slate-200 text-slate-400 hover:text-rose-600 hover:border-rose-300'

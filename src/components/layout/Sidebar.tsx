@@ -5,6 +5,7 @@ import {
   Clock,
   BookOpen,
   Sparkles,
+  Moon,
   MoonStar,
   CheckCircle2,
   Calendar,
@@ -124,8 +125,12 @@ export const Sidebar: React.FC = () => {
   const renderBrandHeader = (showCloseBtn = false) => (
     <div className="p-5 border-b border-slate-100 flex items-center justify-between bg-white shrink-0">
       <div className="flex items-center gap-3">
-        <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-emerald-600 to-teal-700 text-white flex items-center justify-center shadow-md shadow-emerald-600/20 ring-4 ring-emerald-50">
-          <MoonStar className="w-5 h-5 fill-white/20" />
+        <div
+          id="sidebar-moon-logo"
+          className="relative w-10 h-10 rounded-2xl bg-gradient-to-br from-emerald-600 to-teal-700 text-white flex items-center justify-center shadow-md shadow-emerald-600/20 ring-4 ring-emerald-50 shrink-0"
+        >
+          <Moon className="w-5 h-5 text-white stroke-[1.8]" />
+          <Sparkles className="w-2.5 h-2.5 text-emerald-200 fill-emerald-200/50 absolute top-1.5 right-1.5" />
         </div>
         <div>
           <div className="flex items-center gap-1.5">

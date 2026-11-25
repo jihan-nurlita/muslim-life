@@ -65,6 +65,21 @@ const ICON_MAP: Record<string, React.ElementType> = {
   Target,
 };
 
+const toLocalDateStr = (date: Date): string => {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+};
+
+const parseLocalDate = (dateStr: string): Date => {
+  const parts = dateStr.split('-').map(Number);
+  if (parts.length === 3 && !parts.some(Number.isNaN)) {
+    return new Date(parts[0], parts[1] - 1, parts[2]);
+  }
+  return new Date(dateStr);
+};
+
 export const HabitTrackerView: React.FC = () => {
   const {
     habits,
@@ -93,7 +108,7 @@ export const HabitTrackerView: React.FC = () => {
   const CATEGORY_TABS = [
     { id: 'all', label: 'Semua Habit' },
     { id: 'sholat', label: 'Sholat Wajib & Sunnah' },
-    { id: 'quran', label: 'Tilawah Qur\'an' },
+    { id: 'quran', label: "Tilawah Qur'an" },
     { id: 'dzikir', label: 'Dzikir' },
     { id: 'sholawat', label: 'Sholawat' },
     { id: 'sedekah', label: 'Sedekah' },
@@ -102,11 +117,9 @@ export const HabitTrackerView: React.FC = () => {
   ];
 
   const filteredHabits = habits.filter((h) => {
-    // Category filter
     if (activeCategory !== 'all' && h.category !== activeCategory) {
       return false;
     }
-    // Active status filter
     if (filterActiveStatus === 'active_only' && h.isActive === false) {
       return false;
     }
@@ -129,25 +142,25 @@ export const HabitTrackerView: React.FC = () => {
 
   // Date Navigator Helpers
   const handlePreviousDay = () => {
-    const d = new Date(selectedDate);
+    const d = parseLocalDate(selectedDate);
     d.setDate(d.getDate() - 1);
-    setSelectedDate(d.toISOString().split('T')[0]);
+    setSelectedDate(toLocalDateStr(d));
   };
 
   const handleNextDay = () => {
-    const d = new Date(selectedDate);
+    const d = parseLocalDate(selectedDate);
     d.setDate(d.getDate() + 1);
-    setSelectedDate(d.toISOString().split('T')[0]);
+    setSelectedDate(toLocalDateStr(d));
   };
 
   const handleToday = () => {
-    setSelectedDate(new Date().toISOString().split('T')[0]);
+    setSelectedDate(toLocalDateStr(new Date()));
   };
 
-  const isToday = selectedDate === new Date().toISOString().split('T')[0];
+  const isToday = selectedDate === toLocalDateStr(new Date());
 
   const getFormattedDate = (dateStr: string) => {
-    const d = new Date(dateStr);
+    const d = parseLocalDate(dateStr);
     return new Intl.DateTimeFormat('id-ID', {
       weekday: 'long',
       day: 'numeric',
@@ -208,7 +221,7 @@ export const HabitTrackerView: React.FC = () => {
           <ChevronLeft className="w-4 h-4" />
         </button>
 
-        <div className="flex items-center gap-2 text-center">
+        <div className="flex items-center justify-center flex-wrap gap-2 text-center">
           <Calendar className="w-4 h-4 text-emerald-600 shrink-0" />
           <span className="text-xs sm:text-sm font-bold text-slate-800">
             {getFormattedDate(selectedDate)}
@@ -241,7 +254,7 @@ export const HabitTrackerView: React.FC = () => {
         {/* Progress Card */}
         <div className="md:col-span-2 p-6 rounded-3xl bg-gradient-to-br from-emerald-600 via-emerald-700 to-teal-800 text-white shadow-md shadow-emerald-700/20 relative overflow-hidden flex flex-col justify-between">
           <div className="absolute -right-8 -top-8 w-40 h-40 bg-white/10 rounded-full blur-2xl pointer-events-none" />
-          
+
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2">
               <span className="px-3 py-1 rounded-full bg-white/15 backdrop-blur-xs text-xs font-semibold">
@@ -284,7 +297,7 @@ export const HabitTrackerView: React.FC = () => {
               <span className="text-sm font-bold text-amber-700">Hari Berturut-turut</span>
             </div>
             <p className="text-xs text-slate-500 mt-1 leading-relaxed">
-              "Amalan yang paling dicintai oleh Allah adalah amalan yang berkelanjutan walaupun sedikit." (HR. Bukhari)
+              “Amalan yang paling dicintai oleh Allah adalah amalan yang berkelanjutan walaupun sedikit.” (HR. Bukhari)
             </p>
           </div>
 
@@ -367,13 +380,14 @@ export const HabitTrackerView: React.FC = () => {
           const isInactive = h.isActive === false;
           const frequencyBadge = getFrequencyBadge(h);
           const IconComp = ICON_MAP[h.iconName] || Target;
-          const percentProgress = Math.min(100, Math.round((actualVal / targetVal) * 100));
+          const percentProgress =
+            targetVal > 0 ? Math.min(100, Math.round((actualVal / targetVal) * 100)) : 0;
 
           return (
             <div
               key={h.id}
               id={`habit-card-${h.id}`}
-              className={`p-4.5 rounded-3xl border transition-all flex flex-col justify-between gap-3 ${
+              className={`p-4 sm:p-5 rounded-3xl border transition-all flex flex-col justify-between gap-3 ${
                 isInactive
                   ? 'border-slate-200 bg-slate-50/70 opacity-75'
                   : isCompleted

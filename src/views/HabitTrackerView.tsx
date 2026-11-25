@@ -397,105 +397,105 @@ export const HabitTrackerView: React.FC = () => {
                   : 'border-slate-200/80 bg-white hover:border-slate-300 shadow-xs'
               }`}
             >
-              {/* Top Row: Info & Meta */}
-              <div className="flex items-start justify-between gap-3 min-w-0">
+              {/* Top Row: Icon, Title, Progress, Description, Badges */}
+              <div className="flex items-start gap-3.5 min-w-0">
                 <div
-                  className="flex items-start gap-3.5 min-w-0 flex-1 cursor-pointer group"
                   onClick={() => setSelectedDetailHabit(h)}
+                  className={`w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 cursor-pointer transition-transform hover:scale-105 ${
+                    isInactive
+                      ? 'bg-slate-200 text-slate-500'
+                      : isCompleted
+                      ? 'bg-emerald-600 text-white shadow-md shadow-emerald-600/30'
+                      : isHalangan
+                      ? 'bg-rose-500 text-white shadow-md shadow-rose-500/20'
+                      : 'bg-emerald-100/80 text-emerald-700'
+                  }`}
                 >
-                  <div
-                    className={`w-11 h-11 rounded-2xl flex items-center justify-center shrink-0 transition-transform group-hover:scale-105 ${
-                      isInactive
-                        ? 'bg-slate-200 text-slate-500'
-                        : isCompleted
-                        ? 'bg-emerald-600 text-white shadow-md shadow-emerald-600/30'
-                        : isHalangan
-                        ? 'bg-rose-500 text-white shadow-md shadow-rose-500/20'
-                        : 'bg-emerald-100 text-emerald-700'
-                    }`}
-                  >
-                    <IconComp className="w-5 h-5" />
+                  <IconComp className="w-5 h-5" />
+                </div>
+
+                <div
+                  onClick={() => setSelectedDetailHabit(h)}
+                  className="min-w-0 flex-1 cursor-pointer group"
+                >
+                  <div className="flex items-center gap-1.5 flex-wrap">
+                    <h4 className="text-sm font-bold text-slate-800 break-words group-hover:text-emerald-700 transition-colors">
+                      {h.title}
+                    </h4>
+                    {isCompleted && (
+                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 shrink-0">
+                        Tuntas
+                      </span>
+                    )}
+                    {isHalangan && (
+                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-rose-100 text-rose-800 shrink-0 max-w-full truncate">
+                        Udzur ({halanganReasonText || record?.halanganReason || 'Halangan'})
+                      </span>
+                    )}
+                    {isInactive && (
+                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-200 text-slate-600 shrink-0">
+                        Nonaktif
+                      </span>
+                    )}
                   </div>
 
-                  <div className="min-w-0 flex-1">
-                    <div className="flex items-center gap-2 flex-wrap">
-                      <h4 className="text-xs sm:text-sm font-bold text-slate-800 break-words group-hover:text-emerald-700 transition-colors">
-                        {h.title}
-                      </h4>
-                      {isCompleted && (
-                        <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 shrink-0">
-                          Tuntas
-                        </span>
-                      )}
-                      {isHalangan && (
-                        <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-rose-100 text-rose-800 shrink-0 max-w-full truncate">
-                          Udzur ({halanganReasonText || record?.halanganReason || 'Halangan'})
-                        </span>
-                      )}
-                      {isInactive && (
-                        <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-200 text-slate-600 shrink-0">
-                          Nonaktif
-                        </span>
-                      )}
-                    </div>
+                  {/* Progress Text */}
+                  <div className="text-xs font-bold text-emerald-700 mt-0.5">
+                    {formatHabitProgressText(actualVal, targetVal, unitVal)}
+                  </div>
 
-                    {/* Target & Progress Text */}
-                    <div className="flex items-center gap-1.5 text-[11px] text-slate-600 mt-1">
-                      <span className="font-semibold text-emerald-800">
-                        {formatHabitProgressText(actualVal, targetVal, unitVal)}
+                  {h.description && (
+                    <p className="text-[11px] text-slate-400 break-words mt-0.5">
+                      {h.description}
+                    </p>
+                  )}
+
+                  {/* Metadata Badges */}
+                  <div className="flex items-center gap-1.5 mt-2 flex-wrap">
+                    {frequencyBadge && (
+                      <span className="text-[10px] font-semibold px-2 py-0.5 rounded-lg bg-teal-50 text-teal-700 border border-teal-100 flex items-center gap-1">
+                        <Calendar className="w-2.5 h-2.5 shrink-0" />
+                        {frequencyBadge}
                       </span>
-                    </div>
-
-                    {h.description && (
-                      <p className="text-[10px] text-slate-400 truncate mt-0.5">
-                        {h.description}
-                      </p>
                     )}
-
-                    {/* Metadata tags */}
-                    <div className="flex items-center gap-1.5 mt-1.5 flex-wrap">
-                      {frequencyBadge && (
-                        <span className="text-[10px] font-semibold px-2 py-0.5 rounded-lg bg-teal-50 text-teal-700 border border-teal-100 flex items-center gap-1">
-                          <Calendar className="w-2.5 h-2.5 shrink-0" />
-                          {frequencyBadge}
-                        </span>
-                      )}
-                      {h.reminderEnabled && h.reminderTime && (
-                        <span className="text-[10px] font-semibold px-2 py-0.5 rounded-lg bg-amber-50 text-amber-700 border border-amber-100 flex items-center gap-1">
-                          <Clock className="w-2.5 h-2.5 shrink-0" />
-                          {h.reminderTime} WIB
-                        </span>
-                      )}
-                      {h.syncSource && h.syncSource !== 'none' && (
-                        <span className="text-[10px] font-semibold px-2 py-0.5 rounded-lg bg-emerald-50 text-emerald-700 border border-emerald-100 flex items-center gap-1">
-                          <RefreshCw className="w-2.5 h-2.5 shrink-0" />
-                          Sinkron
-                        </span>
-                      )}
-                    </div>
+                    {h.reminderEnabled && h.reminderTime && (
+                      <span className="text-[10px] font-semibold px-2 py-0.5 rounded-lg bg-amber-50 text-amber-700 border border-amber-200/70 flex items-center gap-1">
+                        <Clock className="w-2.5 h-2.5 shrink-0" />
+                        {h.reminderTime} WIB
+                      </span>
+                    )}
+                    {h.syncSource && h.syncSource !== 'none' && (
+                      <span className="text-[10px] font-semibold px-2 py-0.5 rounded-lg bg-emerald-50/90 text-emerald-700 border border-emerald-200/80 flex items-center gap-1">
+                        <RefreshCw className="w-2.5 h-2.5 shrink-0" />
+                        Sinkron
+                      </span>
+                    )}
                   </div>
                 </div>
               </div>
 
-              {/* Progress Mini Bar */}
-              <div className="w-full bg-slate-100 rounded-full h-1.5 overflow-hidden">
-                <div
-                  className={`h-full rounded-full transition-all duration-300 ${
-                    isCompleted ? 'bg-emerald-600' : actualVal > 0 ? 'bg-emerald-500' : 'bg-slate-200'
-                  }`}
-                  style={{ width: `${percentProgress}%` }}
-                />
+              {/* Progress Mini Bar & Divider */}
+              <div className="space-y-2.5 pt-0.5">
+                <div className="w-full bg-slate-100 rounded-full h-1.5 overflow-hidden">
+                  <div
+                    className={`h-full rounded-full transition-all duration-300 ${
+                      isCompleted ? 'bg-emerald-600' : actualVal > 0 ? 'bg-emerald-500' : 'bg-slate-200'
+                    }`}
+                    style={{ width: `${percentProgress}%` }}
+                  />
+                </div>
+                <div className="border-t border-slate-100" />
               </div>
 
-              {/* Bottom Action Bar: Baris 1 ikon manajemen, Baris 2 Catat, Centang, Halangan */}
-              <div className="flex flex-col gap-2.5 pt-2.5 border-t border-slate-100/80 min-w-0">
-                {/* Baris 1: Management Action Icons (Detail, Edit, Nonaktif, Hapus) */}
-                <div className="flex items-center gap-2 shrink-0">
+              {/* Bottom Action Bar: Row 1 Left Icons, Row 2 Right Status Buttons */}
+              <div className="flex flex-col gap-2 min-w-0">
+                {/* Management Action Icons */}
+                <div className="flex items-center gap-1.5">
                   <button
                     type="button"
                     onClick={() => setSelectedDetailHabit(h)}
                     title="Lihat Detail & Riwayat"
-                    className="w-8 h-8 rounded-full bg-slate-50 hover:bg-slate-100 text-slate-400 hover:text-slate-700 transition-colors border border-slate-200/80 flex items-center justify-center shrink-0"
+                    className="w-8 h-8 rounded-xl bg-white hover:bg-slate-50 text-slate-500 hover:text-slate-800 transition-colors border border-slate-200/90 flex items-center justify-center shrink-0"
                   >
                     <Eye className="w-3.5 h-3.5" />
                   </button>
@@ -507,7 +507,7 @@ export const HabitTrackerView: React.FC = () => {
                       setIsAddModalOpen(true);
                     }}
                     title="Edit Habit"
-                    className="w-8 h-8 rounded-full bg-slate-50 hover:bg-emerald-50 text-slate-400 hover:text-emerald-700 transition-colors border border-slate-200/80 flex items-center justify-center shrink-0"
+                    className="w-8 h-8 rounded-xl bg-white hover:bg-emerald-50 text-slate-500 hover:text-emerald-700 transition-colors border border-slate-200/90 flex items-center justify-center shrink-0"
                   >
                     <Edit3 className="w-3.5 h-3.5" />
                   </button>
@@ -516,9 +516,9 @@ export const HabitTrackerView: React.FC = () => {
                     type="button"
                     onClick={() => toggleHabitActive(h.id)}
                     title={h.isActive !== false ? 'Nonaktifkan Habit' : 'Aktifkan Habit'}
-                    className={`w-8 h-8 rounded-full transition-colors border flex items-center justify-center shrink-0 ${
+                    className={`w-8 h-8 rounded-xl transition-colors border flex items-center justify-center shrink-0 ${
                       h.isActive !== false
-                        ? 'bg-slate-50 text-slate-400 hover:bg-slate-100 hover:text-slate-700 border-slate-200/80'
+                        ? 'bg-white text-slate-500 hover:bg-slate-50 hover:text-slate-700 border-slate-200/90'
                         : 'bg-emerald-50 text-emerald-700 border-emerald-200 hover:bg-emerald-100'
                     }`}
                   >
@@ -529,19 +529,19 @@ export const HabitTrackerView: React.FC = () => {
                     type="button"
                     onClick={() => setHabitToDelete(h)}
                     title="Hapus Habit"
-                    className="w-8 h-8 rounded-full bg-slate-50 hover:bg-rose-50 text-slate-400 hover:text-rose-600 transition-colors border border-slate-200/80 flex items-center justify-center shrink-0"
+                    className="w-8 h-8 rounded-xl bg-white hover:bg-rose-50 text-slate-500 hover:text-rose-600 transition-colors border border-slate-200/90 flex items-center justify-center shrink-0"
                   >
                     <Trash2 className="w-3.5 h-3.5" />
                   </button>
                 </div>
 
-                {/* Baris 2: Right Quick Status Controls (Catat, Centang, Halangan) */}
-                <div className="flex items-center justify-end gap-2 min-w-0">
+                {/* Right Quick Status Controls */}
+                <div className="flex items-center justify-end gap-1.5 min-w-0">
                   <button
                     type="button"
                     onClick={() => setHabitToLog(h)}
                     title="Catat / Tambah Hasil Aktual"
-                    className="h-8 px-3 rounded-xl text-xs font-semibold bg-emerald-50/70 hover:bg-emerald-100 text-emerald-800 border border-emerald-200/90 flex items-center justify-center gap-1.5 transition-colors whitespace-nowrap shrink-0"
+                    className="h-8 px-2.5 sm:px-3 rounded-xl text-xs font-semibold bg-emerald-50/90 hover:bg-emerald-100 text-emerald-700 border border-emerald-200/90 flex items-center justify-center gap-1 transition-colors shrink-0"
                   >
                     <TrendingUp className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
                     <span>Catat</span>
@@ -560,13 +560,13 @@ export const HabitTrackerView: React.FC = () => {
                       )
                     }
                     id={`habit-toggle-btn-${h.id}`}
-                    className={`h-8 px-3 rounded-xl text-xs font-semibold flex items-center justify-center gap-1.5 transition-all whitespace-nowrap shrink-0 ${
+                    className={`h-8 px-2.5 sm:px-3 rounded-xl text-xs font-semibold flex items-center justify-center gap-1 transition-all shrink-0 ${
                       isCompleted
                         ? 'bg-emerald-600 text-white shadow-xs hover:bg-emerald-700'
-                        : 'bg-slate-50 hover:bg-emerald-50 hover:text-emerald-700 text-slate-700 border border-slate-200/90'
+                        : 'bg-slate-50/90 hover:bg-emerald-50 hover:text-emerald-700 text-slate-600 border border-slate-200/90'
                     }`}
                   >
-                    <CheckCircle2 className="w-3.5 h-3.5 text-slate-500 shrink-0" />
+                    <CheckCircle2 className="w-3.5 h-3.5 shrink-0" />
                     <span>{isCompleted ? 'Tuntas' : 'Centang'}</span>
                   </button>
 
@@ -578,7 +578,7 @@ export const HabitTrackerView: React.FC = () => {
                     className={`w-8 h-8 rounded-xl text-xs border transition-all flex items-center justify-center shrink-0 ${
                       isHalangan
                         ? 'bg-rose-600 text-white border-rose-600'
-                        : 'bg-slate-50 border-slate-200/90 text-slate-400 hover:text-rose-600 hover:border-rose-300'
+                        : 'bg-slate-50/90 border-slate-200/90 text-slate-400 hover:text-rose-600 hover:border-rose-300'
                     }`}
                   >
                     <ShieldAlert className="w-3.5 h-3.5" />
